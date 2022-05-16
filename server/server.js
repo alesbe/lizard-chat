@@ -13,9 +13,10 @@ app.get('/', function (req, res) {
 io.on('connection', (socket) => {
     console.log("New client connected!");
 
-    socket.on('enterChat', (req) => {
-        console.log(req.name);
+    socket.on('clientJoin', (req) => {
+        console.log(req.name, req.room);
     })
+
     socket.on('dissconnect', () => {
         console.log("Client disconnected");
     })

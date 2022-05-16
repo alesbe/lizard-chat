@@ -1,22 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.css';
-const io = require("socket.io-client");
+import { useChat } from './hooks/useChat';
+import {SocketContext, socket} from './context/context';
 
 function App() {
-  useEffect(() => {
-    const socket = io(`http://localhost:8000`);
-
-    socket.on('connect', () => {
-      console.log("Connecting to server...");
-
-      socket.emit("enterChat", { name: "test" });
-    })
-  }, []);
-
+  const { joinRoom, testFunct } = useChat();
+  
   return (
-    <div className="App">
-      <h1>Lizard chat</h1>
-    </div>
+    <SocketContext.Provider value={socket}>
+      <div className="App">
+        <h1>Lizard chat</h1>
+        <button onClick={() => joinRoom("test", "1234") }>Join</button>
+      </div>
+    </SocketContext.Provider>
   );
 }
 
