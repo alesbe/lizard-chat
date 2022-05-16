@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
-import {SocketContext, socket} from '../context/context'
+import { useEffect, useState } from 'react';
+import { socket } from '../context/context'
 
 export const useChat = () => {
+    const [logged, setLogged] = useState(false)
+
     useEffect(() => {
         socket.on('connect', () => {
             console.log("Connecting to server...");
@@ -16,6 +18,8 @@ export const useChat = () => {
     }
 
     return {
-        joinRoom
+        joinRoom,
+        logged,
+        setLogged
     }
 }
