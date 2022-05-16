@@ -3,6 +3,7 @@ import './App.css';
 import { useChat } from './hooks/useChat';
 import {SocketContext, socket} from './context/context';
 import { LoginForm } from './components/LoginForm';
+import { ChatWindow } from './components/ChatWindow';
 
 function App() {
   const {
@@ -16,7 +17,7 @@ function App() {
       <div className="App">
         <h1>Lizard chat 🦎</h1>
           { logged ?
-            <h2>Logged!</h2>
+            <ChatWindow/>
           :
             <LoginForm setLogged={setLogged} joinRoom={joinRoom}/>
           }

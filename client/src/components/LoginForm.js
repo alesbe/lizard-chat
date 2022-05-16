@@ -9,8 +9,9 @@ export const LoginForm = ({ setLogged, joinRoom }) => {
 
     const handleSubmit = (ev) => {
         ev.preventDefault();
-
+        
         joinRoom(form.username, form.room);
+        setLogged(true);
     }
 
     const handleChange = (ev) => {

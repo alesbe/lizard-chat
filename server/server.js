@@ -13,10 +13,20 @@ app.get('/', function (req, res) {
 io.on('connection', (socket) => {
     console.log("New client connected!");
 
+    /**
+     * Executed when a client enters a room
+     * 
+     * Joins user to req.room and emits the name of the new user to all the room users
+     */
     socket.on('clientJoin', (req) => {
-        console.log(req.name, req.room);
+        console.log(`Moving user ${req.username} to room ${req.room}`);
+
+        socket.join(req.room);
+
+        io.to(req.room).emit('newRoomUser', { username: req.username })
     })
 
+    // Dissconnect
     socket.on('dissconnect', () => {
         console.log("Client disconnected");
     })

@@ -6,13 +6,17 @@ export const useChat = () => {
 
     useEffect(() => {
         socket.on('connect', () => {
-            console.log("Connecting to server...");
+            console.log("Connected to server!");
+
+            socket.on("newRoomUser", (res) => {
+                console.log(`User ${res.username} joined!`)
+            })
         })
     }, []);
 
-    const joinRoom = (name, room) => {
+    const joinRoom = (username, room) => {
         socket.emit("clientJoin", {
-            name,
+            username,
             room
         });
     }
